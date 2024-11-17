@@ -1,3 +1,6 @@
+// components
+import CartMobileIcon from "./components/CartMobileIcon";
+import Nav from "./components/Nav";
 // css
 import "./globals.css";
 import {
@@ -36,6 +39,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${quicksand.variable} ${bangers.variable} ${robotoCondensed.variable} font-quicksand`}
       >
+        <Nav />
+        <CartMobileIcon />
         {children}
       </body>
     </html>

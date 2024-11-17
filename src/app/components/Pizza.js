@@ -23,7 +23,7 @@ const modalStyles = {
   },
 };
 
-const Pizza = ({ pizza, index }) => {
+const Pizza = ({ pizza }) => {
   // modal state
   const [modal, setModal] = useState(false);
   //open modal
@@ -35,15 +35,18 @@ const Pizza = ({ pizza, index }) => {
     setModal(false);
   };
   return (
-    <div key={index} className="group py-2 px-4 xl:py-4 xl:px-2 rounded-xl">
+    <div className="group py-2 px-4 xl:py-4 xl:px-2 rounded-xl">
       <Image
-        className="lg:group-hover:translate-y-3 transition-all duration-300 mb-8 cursor-pointer"
+        onClick={openModal}
+        src={pizza.image}
+        alt="image"
         width={270}
         height={270}
-        src={pizza.image}
-        alt=""
         priority={1}
+        className="lg:group-hover:translate-y-3 transition-all duration-300 mb-8 cursor-pointer"
+        sizes="(max-width:768) 100vw, 700px"
       />
+
       {/* title */}
       <div className="text-xl font-bold mb-3 capitalize cursor-pointer">
         <div>{pizza.name}</div>
@@ -91,6 +94,9 @@ const Pizza = ({ pizza, index }) => {
               className="text-4xl text-orange hover:scale-110 duration-200 cursor-pointer"
             />
           </div>
+
+          {/* pizza details  */}
+          <PizzaDetails pizza={pizza} modal={modal} setModal={setModal} />
         </Modal>
       )}
     </div>
