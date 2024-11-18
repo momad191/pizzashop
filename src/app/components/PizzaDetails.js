@@ -1,5 +1,5 @@
 "use client";
-import react, { useState, useEffect } from "react";
+import react, { useState, useEffect, useContext } from "react";
 // Next Image
 import Image from "next/image";
 
@@ -7,6 +7,9 @@ import Image from "next/image";
 import SizeSelection from "./SizeSelection";
 import CrustSelection from "./CrustSelection";
 import Topping from "./Topping";
+
+//context
+import { CartContext } from "../context/CartContext";
 
 const PizzaDetails = ({ pizza }) => {
   // pizza size state
@@ -22,7 +25,9 @@ const PizzaDetails = ({ pizza }) => {
   // pice state
   const [price, setPrice] = useState(0);
 
-  console.log(additionalTopping);
+  const { addToCart } = useContext(CartContext);
+
+  // console.log(additionalTopping);
 
   // set the price based on the pizza size
   useEffect(() => {
@@ -108,7 +113,20 @@ const PizzaDetails = ({ pizza }) => {
         </div>
         {/* add to cart button   */}
         <div className="h-full flex items-center px-2 lg:items-end">
-          <button className="btn btn-lg gradient w-full flex justify-center gap-x-2 ">
+          <button
+            onClick={() =>
+              addToCart(
+                pizza.id,
+                pizza.image,
+                pizza.name,
+                price,
+                additionalTopping,
+                size,
+                crust
+              )
+            }
+            className="btn btn-lg gradient w-full flex justify-center gap-x-2 "
+          >
             <div>Add to cart for</div>
             <div> $ {price}</div>
           </button>
