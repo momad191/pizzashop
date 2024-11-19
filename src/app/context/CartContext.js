@@ -35,6 +35,19 @@ const CartProvider = ({ children }) => {
       crust,
       amount: 1,
     };
+
+    const cartItemIndex = cart.findIndex(
+      (item) =>
+        item.id === id &&
+        item.price === price &&
+        item.size === size &&
+        item.size === size &&
+        // check if additionaltopping array is equal
+        JSON.stringify(item.additionalTopping) ===
+          JSON.stringify(item.additionalTopping) &&
+        item.crust === crust
+    );
+
     setCart([...cart, newItem]);
 
     // open the cart every time you add a product
