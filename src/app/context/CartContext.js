@@ -36,6 +36,9 @@ const CartProvider = ({ children }) => {
       amount: 1,
     };
     setCart([...cart, newItem]);
+
+    // open the cart every time you add a product
+    setIsOpen(true);
   };
 
   return (
