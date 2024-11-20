@@ -5,7 +5,7 @@ import { BsHandbagFill } from "react-icons/bs";
 
 const CartMobileIcon = () => {
   // console.log(useContext(CartContext));
-  const { isOpen, setIsOpen } = useContext(CartContext);
+  const { isOpen, setIsOpen, itemAmount } = useContext(CartContext);
   return (
     <div
       onClick={() => setIsOpen(!isOpen)}
@@ -15,7 +15,7 @@ const CartMobileIcon = () => {
       {/* amount */}
 
       <span className="absolute text-white bottom-3 right-4 gradient w-5 h-5 flex justify-center items-center rounded-full font-robotoCondensed text-[13px]">
-        3
+        {itemAmount}
       </span>
     </div>
   );
