@@ -41,7 +41,7 @@ const CheckoutDetails = ({ setModal }) => {
     event.preventDefault();
 
     try {
-      await creatOrder(formData, cart); // Pass cart as second parameter
+      await creatOrder(formData, cart, cartTotal); // Pass cart as second parameter
       setSuccessMsg(true);
     } catch (e) {
       console.error(e);
@@ -245,6 +245,10 @@ const CheckoutDetails = ({ setModal }) => {
                   );
                 })}
               </div>
+              <hr className="border border-primary border-dashed mb-2" />
+              <span className=" font-extrabold text-black/90">
+                total: ${parseFloat(cartTotal).toFixed(2)}
+              </span>
             </div>
             {/* place order button  */}
             <button type="submit" className="btn btn-lg gradient w-full">

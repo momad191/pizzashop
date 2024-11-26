@@ -11,6 +11,11 @@ const orderSchema = new Schema({
   floor: { type: String, required: true },
   apt_no: { type: String, required: true },
   mentions: { type: String, default: "" },
+  total: { type: Number, required: true },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
   cart: [],
 });
 
