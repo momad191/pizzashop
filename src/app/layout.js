@@ -3,6 +3,8 @@ import CartMobile from "./components/CartMobile";
 import CartMobileIcon from "./components/CartMobileIcon";
 import CartDesktop from "./components/CartDesktop";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import { dbConnect } from "@/lib/mongo";
 
 //provider
 import CartProvider from "./context/CartContext";
@@ -38,7 +40,8 @@ const robotoCondensed = Roboto_Condensed({
   weight: ["300", "400", "700"],
 });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  await dbConnect();
   return (
     <CartProvider>
       <html lang="en">
@@ -50,6 +53,7 @@ export default function RootLayout({ children }) {
           <CartMobile />
           {children}
           <CartDesktop />
+          <Footer />
         </body>
       </html>
     </CartProvider>

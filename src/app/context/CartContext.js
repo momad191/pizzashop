@@ -77,7 +77,6 @@ const CartProvider = ({ children }) => {
       newCart[cartItemIndex].amount += 1;
       setCart(newCart);
     }
-
     // open the cart every time you add a product
     setIsOpen(true);
   };
@@ -129,6 +128,7 @@ const CartProvider = ({ children }) => {
         setIsOpen,
         addToCart,
         cart,
+        setCart,
         removeItem,
         increaseAmount,
         decreaseAmount,

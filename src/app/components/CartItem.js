@@ -83,7 +83,7 @@ const CartItem = ({ pizza }) => {
               className="capitalize text-sm gradient font-medium px-3 py-1 rounded-full leading-none"
               key={index}
             >
-              {topping.name}{" "}
+              {topping.name}
             </div>
           );
         })}

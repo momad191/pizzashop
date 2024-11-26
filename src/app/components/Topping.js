@@ -32,7 +32,7 @@ const Topping = ({ topping, additionalTopping, setAdditionalTopping }) => {
     handleTopping();
   }, [isChecked]);
 
-  return (
+  return ( 
     <div
       className={`${
         isChecked && "border-ornage "

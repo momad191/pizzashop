@@ -4,16 +4,19 @@ import { CartContext } from "../context/CartContext";
 import CartTop from "./CartTop";
 import CartItem from "./CartItem";
 import CartBottom from "./CartBottom";
+import { IoCloseOutline } from "react-icons/io5";
 const CartDesktop = () => {
   const { isOpen, cart } = useContext(CartContext);
+
   return (
     <div
       className={`${
-        isOpen ? "left-0" : "-left-full"
-      } bg-white fixed top-0 bottom-0 w-[500px] shadow-2xl hidded lg:flex 
+        cart.length >= 1 && isOpen ? "left-0" : "-left-full"
+      } bg-white fixed top-0 bottom-0 w-full lg:w-[500px] shadow-2xl hidded lg:flex 
       flex-col transition-all duration-300`}
     >
       {/* cart top  */}
+
       <CartTop />
       {/* item list  */}
       <div

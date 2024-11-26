@@ -66,12 +66,12 @@ const PizzaDetails = ({ pizza, setModal }) => {
             priority={1}
             className="mx-auto relative"
           />
-        </div>
+        </div> 
       </div>
       {/* details  */}
       <div className="flex flex-col flex-1">
         <div className="flex-1 p-x text-center lg:text-left">
-          <div className="flex-1 bg-white overflow-y-scroll h-[46vh] scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-white pr-2">
+          <div className="flex-1 bg-white overflow-y-scroll h-[44vh] lg:h-[64vh] scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-white pr-2">
             {/* name */}
             <div className="font-semibold">
               <h2 className="capitalize text-3xl mb-1">{pizza.name}</h2>
