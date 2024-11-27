@@ -38,6 +38,7 @@ export async function creatOrder(formData, cart, cartTotal) {
     };
 
     await Order.create(order);
+    revalidatePath("/orders");
     return { success: true };
   } catch (e) {
     console.error(e);
@@ -45,7 +46,7 @@ export async function creatOrder(formData, cart, cartTotal) {
   }
 }
 
-export async function getOrders() {
+export async function getAllOrders() {
   try {
     const orders = await Order.find();
     // Convert each order into a plain object
@@ -56,7 +57,72 @@ export async function getOrders() {
     }));
 
     return serializedOrders;
-    revalidatePath("/orders");
+  } catch (e) {
+    throw new Error(e.message || "Failed to fetch orders");
+  }
+}
+
+export async function Delivered(id) {
+  const order = await Order.findById(id);
+  await order.updateOne({ status: "delivered" });
+  revalidatePath("/orders");
+}
+
+export async function Received(id) {
+  const order = await Order.findById(id);
+  await order.updateOne({ status: "received" });
+  revalidatePath("/orders");
+}
+
+export async function deleteOrder(id) {
+  const order = await Order.findById(id);
+  await order.deleteOne({ _id: order._id });
+  revalidatePath("/orders");
+}
+
+export async function getDeliveredOrders() {
+  try {
+    const orders = await Order.find({ status: "delivered" });
+    // Convert each order into a plain object
+    const serializedOrders = orders.map((order) => ({
+      ...order.toObject(), // Convert Mongoose Document to plain object
+      _id: order._id.toString(), // Convert ObjectId to string
+      date: order.date ? order.date.toISOString() : null, // Convert Date to string (if applicable)
+    }));
+
+    return serializedOrders;
+  } catch (e) {
+    throw new Error(e.message || "Failed to fetch orders");
+  }
+}
+
+export async function getReceivedOrders() {
+  try {
+    const orders = await Order.find({ status: "received" });
+    // Convert each order into a plain object
+    const serializedOrders = orders.map((order) => ({
+      ...order.toObject(), // Convert Mongoose Document to plain object
+      _id: order._id.toString(), // Convert ObjectId to string
+      date: order.date ? order.date.toISOString() : null, // Convert Date to string (if applicable)
+    }));
+
+    return serializedOrders;
+  } catch (e) {
+    throw new Error(e.message || "Failed to fetch orders");
+  }
+}
+
+export async function getNewOrders() {
+  try {
+    const orders = await Order.find({ status: "new" });
+    // Convert each order into a plain object
+    const serializedOrders = orders.map((order) => ({
+      ...order.toObject(), // Convert Mongoose Document to plain object
+      _id: order._id.toString(), // Convert ObjectId to string
+      date: order.date ? order.date.toISOString() : null, // Convert Date to string (if applicable)
+    }));
+
+    return serializedOrders;
   } catch (e) {
     throw new Error(e.message || "Failed to fetch orders");
   }

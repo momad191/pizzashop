@@ -12,6 +12,8 @@ const orderSchema = new Schema({
   apt_no: { type: String, required: true },
   mentions: { type: String, default: "" },
   total: { type: Number, required: true },
+  status: { type: String, default: "new" }, //delivered  //received
+  delivery_rep_name: { type: String, default: "" },
   date: {
     type: Date,
     default: Date.now,

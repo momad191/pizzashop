@@ -1,8 +1,8 @@
 import Orders from "../components/Orders";
-import { getOrders } from "@/app/actions/order";
+import { getAllOrders } from "@/app/actions/order";
 
 const page = async () => {
-  const orders = await getOrders();
+  const orders = await getAllOrders();
   return <Orders orders={orders} />;
 };
 
