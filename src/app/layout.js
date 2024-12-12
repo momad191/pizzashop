@@ -1,10 +1,10 @@
 // components
+import { dbConnect } from "@/lib/mongo";
 import CartMobile from "./components/CartMobile";
 import CartMobileIcon from "./components/CartMobileIcon";
 import CartDesktop from "./components/CartDesktop";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import { dbConnect } from "@/lib/mongo";
 
 //provider
 import CartProvider from "./context/CartContext";
@@ -42,6 +42,7 @@ const robotoCondensed = Roboto_Condensed({
 
 export default async function RootLayout({ children }) {
   await dbConnect();
+
   return (
     <CartProvider>
       <html lang="en">

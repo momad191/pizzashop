@@ -38,7 +38,14 @@ const PizzaDetails = ({ pizza, setModal }) => {
       : size === "large"
       ? setPrice(parseFloat(pizza.priceLg + additionalToppingPrice).toFixed(2))
       : null;
-  });
+  }, [
+    size,
+    pizza.priceSm,
+    pizza.priceMd,
+    pizza.priceLg,
+    additionalToppingPrice,
+    additionalTopping,
+  ]);
 
   useEffect(() => {
     if (additionalTopping.length > 0) {
@@ -49,7 +56,7 @@ const PizzaDetails = ({ pizza, setModal }) => {
     } else {
       setAdditionalToppingPrice(0);
     }
-  });
+  }, [additionalTopping]);
 
   return (
     <div className="flex flex-col lg:flex-row lg:gap-x-8 h-full md:p-8">
@@ -66,7 +73,7 @@ const PizzaDetails = ({ pizza, setModal }) => {
             priority={1}
             className="mx-auto relative"
           />
-        </div> 
+        </div>
       </div>
       {/* details  */}
       <div className="flex flex-col flex-1">

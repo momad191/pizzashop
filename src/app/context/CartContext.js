@@ -24,7 +24,7 @@ const CartProvider = ({ children }) => {
     }, 0);
 
     setItemAmount(amount);
-  });
+  }, [cart]);
 
   // update cart total
   useEffect(() => {

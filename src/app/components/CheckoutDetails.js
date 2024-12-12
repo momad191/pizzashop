@@ -2,6 +2,8 @@
 import react, { useState, useEffect, useContext } from "react";
 import { creatOrder } from "../actions/order";
 
+import { FaCheckCircle } from "react-icons/fa";
+
 // next image
 import Image from "next/image";
 
@@ -75,7 +77,7 @@ const CheckoutDetails = ({ setModal }) => {
       //clean timer
       return () => clearTimeout(timer);
     }
-  }, [successMsg]);
+  }, [successMsg, setCart, setModal]);
 
   return (
     <div>
@@ -91,7 +93,13 @@ const CheckoutDetails = ({ setModal }) => {
           <h2 className="text-2xl font-semibold text-center ">
             Thank you! The order has been placed!
           </h2>
-          <Image src={"/success-1.gif"} width={150} height={150} alt="" />
+          <Image
+            src={"/success-1.gif"}
+            width={500}
+            height={500}
+            alt="Success Animation"
+            unoptimized
+          />
           <div>
             The window will be close in <span>{count}</span>seconds
           </div>

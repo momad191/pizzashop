@@ -59,8 +59,8 @@ const SizeSelection = ({ pizza, size, setSize }) => {
                 : "border-transparent filter saturate-[.1]"
             } mb-1`}
             src={pizza.image}
-            width={80}
-            height={80}
+            width={90}
+            height={90}
             alt=""
           />
           <input
