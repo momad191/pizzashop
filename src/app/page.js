@@ -416,6 +416,43 @@ const pizzas = [
       },
     ],
   },
+  {
+    id: 11,
+    name: "vegetarian2",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae dolorum enim eveniet. Mollitia laudantium, sunt blanditiis ratione quam delectus.",
+    image: "/vegetarian.webp",
+    priceSm: 9.99,
+    priceMd: 10.99,
+    priceLg: 11.99,
+    toppings: [
+      {
+        image: "/cherry.png",
+        name: "cherry tomatoes",
+        price: 2,
+      },
+      {
+        image: "/corn.png",
+        name: "corn",
+        price: 2,
+      },
+      {
+        image: "/fresh-tomatoes.png",
+        name: "fresh tomatoes",
+        price: 2,
+      },
+      {
+        image: "/jalapeno.png",
+        name: "jalapeno",
+        price: 2,
+      },
+      {
+        image: "/parmesan.png",
+        name: "parmesan",
+        price: 2,
+      },
+    ],
+  },
 ];
 
 export default function Home() {

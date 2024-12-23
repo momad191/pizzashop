@@ -32,15 +32,21 @@ const PizzaDetails = ({ pizza, setModal }) => {
   // set the price based on the pizza size
   useEffect(() => {
     let calculatedPrice = 0;
-  
+
     if (size === "small") {
-      calculatedPrice = parseFloat(pizza.priceSm + additionalToppingPrice).toFixed(2);
+      calculatedPrice = parseFloat(
+        pizza.priceSm + additionalToppingPrice
+      ).toFixed(2);
     } else if (size === "medium") {
-      calculatedPrice = parseFloat(pizza.priceMd + additionalToppingPrice).toFixed(2);
+      calculatedPrice = parseFloat(
+        pizza.priceMd + additionalToppingPrice
+      ).toFixed(2);
     } else if (size === "large") {
-      calculatedPrice = parseFloat(pizza.priceLg + additionalToppingPrice).toFixed(2);
+      calculatedPrice = parseFloat(
+        pizza.priceLg + additionalToppingPrice
+      ).toFixed(2);
     }
-  
+
     setPrice(calculatedPrice);
   }, [
     size,
@@ -50,7 +56,6 @@ const PizzaDetails = ({ pizza, setModal }) => {
     additionalToppingPrice,
     additionalTopping,
   ]);
-  
 
   useEffect(() => {
     if (additionalTopping.length > 0) {
@@ -125,24 +130,24 @@ const PizzaDetails = ({ pizza, setModal }) => {
         </div>
         {/* add to cart button   */}
         <div className="h-full flex items-center px-2 lg:items-end">
-        <button
-          onClick={() => {
-            addToCart(
-              pizza.id,
-              pizza.image,
-              pizza.name,
-              price,
-              additionalTopping,
-              size,
-              crust
-            );
-            setModal(false);
-          }}
-          className="btn btn-lg gradient w-full flex justify-center gap-x-2 "
-        >
-          <div>Add to cart for</div>
-          <div> $ {price}</div>
-        </button>
+          <button
+            onClick={() => {
+              addToCart(
+                pizza.id,
+                pizza.image,
+                pizza.name,
+                price,
+                additionalTopping,
+                size,
+                crust
+              );
+              setModal(false);
+            }}
+            className="btn btn-lg gradient w-full flex justify-center gap-x-2 "
+          >
+            <div>Add to cart for</div>
+            <div> $ {price}</div>
+          </button>
         </div>
       </div>
     </div>

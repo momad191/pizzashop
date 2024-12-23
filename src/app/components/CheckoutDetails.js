@@ -1,5 +1,5 @@
 "use client";
-import  { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { creatOrder } from "../actions/order";
 
 import { FaCheckCircle } from "react-icons/fa";
@@ -18,7 +18,7 @@ const CheckoutDetails = ({ setModal }) => {
   const [count, setCount] = useState(5);
 
   const [error, setError] = useState("");
-  
+
   const [formErrors, setFormErrors] = useState({});
 
   const [formData, setFormData] = useState({
@@ -46,11 +46,10 @@ const CheckoutDetails = ({ setModal }) => {
     });
   };
 
-
-
   const validateForm = () => {
     const errors = {};
-    if (!formData.first_name.trim()) errors.first_name = "First name is required.";
+    if (!formData.first_name.trim())
+      errors.first_name = "First name is required.";
     if (!formData.last_name.trim()) errors.last_name = "Last name is required.";
     if (!formData.email.trim()) {
       errors.email = "Email is required.";
@@ -62,11 +61,14 @@ const CheckoutDetails = ({ setModal }) => {
     } else if (!/^\d{10}$/.test(formData.phone)) {
       errors.phone = "Phone number must be 10 digits.";
     }
-    if (!formData.street_name.trim()) errors.street_name = "Street name is required.";
-    if (!formData.street_no.trim()) errors.street_no = "Street number is required.";
+    if (!formData.street_name.trim())
+      errors.street_name = "Street name is required.";
+    if (!formData.street_no.trim())
+      errors.street_no = "Street number is required.";
     if (!formData.block.trim()) errors.block = "Block is required.";
     if (!formData.floor.trim()) errors.floor = "Floor is required.";
-    if (!formData.apt_no.trim()) errors.apt_no = "Apartment number is required.";
+    if (!formData.apt_no.trim())
+      errors.apt_no = "Apartment number is required.";
     return errors;
   };
 
@@ -83,7 +85,7 @@ const CheckoutDetails = ({ setModal }) => {
       setSuccessMsg(true);
     } catch (e) {
       console.error(e);
-     
+
       setError("Failed to place the order. Please try again.");
     }
   }
@@ -122,7 +124,6 @@ const CheckoutDetails = ({ setModal }) => {
         <div className=" flex flex-col-2 gap-3 items-center justify-center bg-red-500 border border-white p-4 rounded-xl">
           <FaCheckCircle className="text-5xl text-white/80 " />
           <h4 className="text-white text-2xl font-bold ">{error}</h4>
-         
         </div>
       )}
 
@@ -168,7 +169,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.first_name}
                   onChange={handleChange}
                 />
-             {formErrors.first_name && <p className="text-red-500">{formErrors.first_name}</p>}
+                {formErrors.first_name && (
+                  <p className="text-red-500">{formErrors.first_name}</p>
+                )}
 
                 <input
                   type="text"
@@ -179,8 +182,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.last_name}
                   onChange={handleChange}
                 />
-            {formErrors.last_name && <p className="text-red-500">{formErrors.last_name}</p>}
-
+                {formErrors.last_name && (
+                  <p className="text-red-500">{formErrors.last_name}</p>
+                )}
               </div>
 
               {/* phone &  email  */}
@@ -194,7 +198,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.phone}
                   onChange={handleChange}
                 />
-                   {formErrors.phone && <p className="text-red-500">{formErrors.phone}</p>}
+                {formErrors.phone && (
+                  <p className="text-red-500">{formErrors.phone}</p>
+                )}
                 <input
                   type="text"
                   className="w-full input"
@@ -204,7 +210,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.email}
                   onChange={handleChange}
                 />
-                  {formErrors.email && <p className="text-red-500">{formErrors.email}</p>}
+                {formErrors.email && (
+                  <p className="text-red-500">{formErrors.email}</p>
+                )}
               </div>
 
               {/* street name &  street no  */}
@@ -218,7 +226,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.street_name}
                   onChange={handleChange}
                 />
-                  {formErrors.street_name && <p className="text-red-500">{formErrors.street_name}</p>}
+                {formErrors.street_name && (
+                  <p className="text-red-500">{formErrors.street_name}</p>
+                )}
                 <input
                   type="text"
                   className="w-full input"
@@ -228,7 +238,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.street_no}
                   onChange={handleChange}
                 />
-                  {formErrors.street_no && <p className="text-red-500">{formErrors.street_no}</p>}
+                {formErrors.street_no && (
+                  <p className="text-red-500">{formErrors.street_no}</p>
+                )}
               </div>
               {/* block floor &  apartment  */}
               <div className="flex justify-between gap-x-4">
@@ -241,7 +253,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.block}
                   onChange={handleChange}
                 />
-                    {formErrors.block && <p className="text-red-500">{formErrors.block}</p>}
+                {formErrors.block && (
+                  <p className="text-red-500">{formErrors.block}</p>
+                )}
                 <input
                   type="text"
                   className="w-full input"
@@ -251,7 +265,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.floor}
                   onChange={handleChange}
                 />
-                  {formErrors.floor && <p className="text-red-500">{formErrors.floor}</p>}
+                {formErrors.floor && (
+                  <p className="text-red-500">{formErrors.floor}</p>
+                )}
                 <input
                   type="text"
                   className="w-full input"
@@ -261,7 +277,9 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.apt_no}
                   onChange={handleChange}
                 />
-                  {formErrors.apt_no && <p className="text-red-500">{formErrors.apt_no}</p>}
+                {formErrors.apt_no && (
+                  <p className="text-red-500">{formErrors.apt_no}</p>
+                )}
               </div>
               {/* textarea  */}
               <div className="flex-1 h-full">
@@ -273,7 +291,6 @@ const CheckoutDetails = ({ setModal }) => {
                   value={formData.mentions}
                   onChange={handleChange}
                 ></textarea>
-                  
               </div>
             </div>
           </div>

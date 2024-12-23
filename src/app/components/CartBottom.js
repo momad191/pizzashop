@@ -1,4 +1,4 @@
-import  { useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 //icons
 import { IoCloseOutline } from "react-icons/io5";
@@ -47,15 +47,15 @@ const CartBottom = () => {
           </div>
           {/* btn  */}
           <div className="flex flex-col gap-y-3 ">
-          <button
-            onClick={() => {
-              setIsOpen(false);
-              openModal();
-            }}
-            className="btn btn-lg gradient font-semibold flex justify-center"
-          >
-            Checkout
-          </button>
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                openModal();
+              }}
+              className="btn btn-lg gradient font-semibold flex justify-center"
+            >
+              Checkout
+            </button>
           </div>
         </div>
       ) : (
