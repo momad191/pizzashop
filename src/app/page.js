@@ -1,6 +1,11 @@
 // import components
 import Pizza from "./components/Pizza";
 import Banner from "./components/Banner";
+import CartMobile from "./components/CartMobile";
+import CartMobileIcon from "./components/CartMobileIcon";
+import CartDesktop from "./components/CartDesktop";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 // pizza data
 const pizzas = [
@@ -374,17 +379,62 @@ const pizzas = [
       },
     ],
   },
+  {
+    id: 11,
+    name: "vegetarian2",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae dolorum enim eveniet. Mollitia laudantium, sunt blanditiis ratione quam delectus.",
+    image: "/vegetarian.webp",
+    priceSm: 9.99,
+    priceMd: 10.99,
+    priceLg: 11.99,
+    toppings: [
+      {
+        image: "/cherry.png",
+        name: "cherry tomatoes",
+        price: 2,
+      },
+      {
+        image: "/corn.png",
+        name: "corn",
+        price: 2,
+      },
+      {
+        image: "/fresh-tomatoes.png",
+        name: "fresh tomatoes",
+        price: 2,
+      },
+      {
+        image: "/jalapeno.png",
+        name: "jalapeno",
+        price: 2,
+      },
+      {
+        image: "/parmesan.png",
+        name: "parmesan",
+        price: 2,
+      },
+    ],
+  },
 ];
 
 export default function Home() {
   return (
-    <div className="container mx-auto">
-      {/* Pizza Grid  */}
-      <div className="grid grid-cols-2 gap-[15px] md:grid-cols-3 xl:grid-cols-4 xl:gap-[30px] py-12">
-        {pizzas.map((pizza, index) => {
-          return <Pizza pizza={pizza} index={index} />;
-        })}
+    <section>
+      <Nav />
+      <CartMobileIcon />
+      <CartMobile />
+      <Banner />
+      <div className="container mx-auto">
+        {/* Pizza Grid  */}
+        <div className="grid grid-cols-2 gap-[15px] md:grid-cols-3 xl:grid-cols-4 xl:gap-[30px] py-12">
+          {pizzas.map((pizza, index) => {
+            return <Pizza pizza={pizza} key={index} />;
+          })}
+        </div>
       </div>
-    </div>
+      <CartDesktop />
+      <Footer />
+    </section>
   );
 }
