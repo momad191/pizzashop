@@ -116,3 +116,45 @@ export const POST = async (request) => {
     }
   );
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export const PATCH = async (request) => {
+  try {
+    // Parse the request body and URL for the order ID and updated data
+    const { searchParams } = new URL(request.url);
+    const orderId = searchParams.get("id"); // Order ID from query parameters
+    if (!orderId) {
+      return new NextResponse("Order ID is required", { status: 400 });
+    }
+
+    const updatedData = await request.json(); // Updated fields sent in the request body
+
+    // Connect to the database
+    await dbConnect();
+
+    // Update the order in the database
+    const updatedOrder = await Order.findByIdAndUpdate(orderId, updatedData, {
+      new: true, // Return the updated document
+      runValidators: true, // Ensure validation rules are applied
+    });
+
+    if (!updatedOrder) {
+      return new NextResponse("Order not found", { status: 404 });
+    }
+
+    // Return the updated order as JSON
+    return new NextResponse(
+      JSON.stringify({
+        status: "success",
+        message: "Order updated successfully",
+        order: updatedOrder,
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new NextResponse("Error updating order: " + error.message, {
+      status: 500,
+    });
+  }
+};

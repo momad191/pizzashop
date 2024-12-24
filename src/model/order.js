@@ -12,7 +12,7 @@ const orderSchema = new Schema({
   apt_no: { type: String, required: true },
   mentions: { type: String, default: "" },
   total: { type: Number, required: true },
-  status: { type: String, default: "new" }, //delivered  //received
+  status: { type: String, default: "pending" }, //delivered  //processing
   delivery_rep_name: { type: String, default: "" },
   date: {
     type: Date,
