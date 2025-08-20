@@ -1,12 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers, setPage } from "../../redux/slice";
+import Sidebar from "../Sidebar";
 
 const Dashboard = () => {
-  const [activeMenu, setActiveMenu] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState(null); // To track the order being viewed
   const [orders, setOrders] = useState([
     {
@@ -68,10 +66,6 @@ const Dashboard = () => {
     );
   }
 
-  const toggleMenu = (menu) => {
-    setActiveMenu(activeMenu === menu ? null : menu);
-  };
-
   const changeStatus = (id, newStatus) => {
     if (window.confirm("Are you sure you want to change the order status?")) {
       setOrders(
@@ -92,103 +86,8 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-red-50 flex flex-col md:flex-row">
-      {/* Toggle Button */}
-      <button
-        className="md:hidden bg-red-600 text-white p-2 m-2 rounded-md shadow"
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      >
-        {isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
-      </button>
-
       {/* Sidebar */}
-      {isSidebarOpen && (
-        <aside className="w-full md:w-64 bg-red-600 text-white p-4 flex flex-col">
-          <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-          <nav className="space-y-2">
-            {[
-              {
-                name: "Orders",
-                url: `/dashboard/allorders`,
-                items: [
-                  {
-                    name: "All Orders",
-                    url: `/dashboard/allorders`,
-                  },
-                  {
-                    name: "New Orders",
-                    url: `/dashboard/neworders`,
-                  },
-                  {
-                    name: "Delivered",
-                    url: `/dashboard/delivered`,
-                  },
-                ],
-              },
-              {
-                name: "Users",
-                url: "http://localhost:3000/dashboard/allusers",
-                items: [
-                  {
-                    name: "All users",
-                    url: `/dashboard/allusers`,
-                  },
-                  {
-                    name: "Admins",
-                    url: `/dashboard/admins`,
-                  },
-                  {
-                    name: "Customers",
-                    url: `/dashboard/customers`,
-                  },
-                ],
-              },
-              {
-                name: "Settings",
-                url: "http://localhost:3000/dashboard/settins",
-
-                items: [
-                  {
-                    name: "General",
-                    url: `/dashboard/settins`,
-                  },
-                  {
-                    name: "Notifications",
-                    url: `/dashboard/settins`,
-                  },
-                  {
-                    name: "Profile",
-                    url: `/dashboard/settins`,
-                  },
-                ],
-              },
-            ].map((menu, idx) => (
-              <div key={idx}>
-                <button
-                  className="w-full text-left p-2 rounded-md hover:bg-red-700"
-                  onClick={() => toggleMenu(menu.name)}
-                >
-                  {menu.name}
-                </button>
-
-                {activeMenu === menu.name && (
-                  <div className="pl-4 space-y-1">
-                    {menu.items.map((item, subIdx) => (
-                      <Link href={`${item.url}`}>
-                        <button
-                          key={subIdx}
-                          className="w-full text-left text-sm p-1 rounded-md hover:bg-red-800"
-                        >
-                          {item.name}
-                        </button>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        </aside>
-      )}
+      <Sidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-6">

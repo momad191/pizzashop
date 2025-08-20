@@ -25,7 +25,7 @@ const SizeSelection = ({ pizza, size, setSize }) => {
             onChange={(e) => setSize(e.target.value)}
             className="appearance-none"
           />
-          Small
+          صغير
         </label>
         {/* Medium  */}
         <label className="flex flex-col items-center gap-x-2 cursor-pointer">
@@ -48,7 +48,7 @@ const SizeSelection = ({ pizza, size, setSize }) => {
             onChange={(e) => setSize(e.target.value)}
             className="appearance-none"
           />
-          Medium
+          وسط
         </label>
         {/* Large  */}
         <label className="flex flex-col items-center gap-x-2 cursor-pointer">
@@ -71,7 +71,7 @@ const SizeSelection = ({ pizza, size, setSize }) => {
             onChange={(e) => setSize(e.target.value)}
             className="appearance-none"
           />
-          Large
+          كبير
         </label>
       </div>
     </div>

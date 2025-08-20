@@ -11,7 +11,7 @@ import {
 
 const Banner = () => {
   return (
-    <section className="bg-primary bg-pattern lg:min-h-[768px] pt-16 lg:pt-16 ">
+    <section className="bg-primary bg-pattern lg:min-h-[768px] pt-16 lg:pt-16  ">
       <div className="container mx-auto min-h-[768px] flex items-center justify-center">
         <MouseParallaxContainer
           globalFactorX={0.4}
@@ -20,14 +20,17 @@ const Banner = () => {
           className="w-full flex flex-col lg:flex-row justify-between items-center "
         >
           <MouseParallaxChild factorX={0.1} factorY={0.2}>
-            <div className="flex flex-col lg:flex-row items-center text-center lg:text-left flex-1 px-6 text-white">
+            <div className="flex flex-col lg:flex-row items-center text-center lg:text-left flex-1 px-6 text-white ">
               <div className="flex-1">
-                <div className="font-bangers text-[32px] text-white uppercase tracking-[0.03em]">
-                  Best pizza in town
+                <div className="font-Kufi-arabic  text-[42px] text-white uppercase tracking-[0.03em] ">
+                  {/* Best pizza in town */} أفضل بيتزا في عنيزة
                 </div>
-                <h1 className="text-6xl lg:text-8xl font-bangers drop-shadow-md">
-                  Pizza perfection <br /> in every bite
+                <h1 className="text-6xl lg:text-8xl font-Kufi-arabic drop-shadow-md">
+                  بيتزا مثالية <br /> في كل قضمة
                 </h1>
+                {/* <h1 className="text-6xl lg:text-8xl font-bangers drop-shadow-md">
+                  Pizza perfection <br /> in every bite
+                </h1> */}
               </div>
             </div>
           </MouseParallaxChild>

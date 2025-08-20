@@ -60,3 +60,7 @@
 .animate-fadeIn {
   animation: fadeIn 1s ease-out;
 }
+
+.font-Kufi-arabic {
+  font-family: var(--font-Kufi-arabic), sans-serif;
+}

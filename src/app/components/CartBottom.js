@@ -41,9 +41,13 @@ const CartBottom = () => {
       {cart.length >= 1 ? (
         <div className="px-6 py-3 lg:py-6 mt-auto">
           {/* totla price  */}
-          <div className="flex justify-between items-center mb-6 text-lg font-semibold font-robotoCondensed">
-            <div>Totla:</div>
-            <div>${parseFloat(cartTotal).toFixed(2)}</div>
+          <div
+            dir="rtl"
+            className="flex justify-between items-center mb-6 text-lg font-semibold font-robotoCondensed"
+          >
+            {/* <div>Totla:</div> */}
+            <div>المبلغ الإجمالي:</div>
+            <div> {parseFloat(cartTotal).toFixed(2)} SAR </div>
           </div>
           {/* btn  */}
           <div className="flex flex-col gap-y-3 ">
@@ -54,13 +58,15 @@ const CartBottom = () => {
               }}
               className="btn btn-lg gradient font-semibold flex justify-center"
             >
-              Checkout
+              {/* Checkout */}
+              اكمل الدفع
             </button>
           </div>
         </div>
       ) : (
         <div className="absolute top-0 w-full h-full flex justify-center items-center z-10">
-          <div className="font-semibold"> Your cart is empty</div>
+          {/* <div className="font-semibold"> Your cart is empty</div> */}
+          <div className="font-semibold"> سلة التسوق الخاصة بك فارغة</div>
         </div>
       )}
       {/* checkout modal  */}

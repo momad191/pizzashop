@@ -5,10 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProcessing, setPage } from "../../../redux/ordersSlice";
+import Sidebar from "../../Sidebar";
 
 const Page = () => {
-  const [activeMenu, setActiveMenu] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [selectedOrderCart, setSelectedOrderCart] = useState(null);
 
@@ -53,10 +52,6 @@ const Page = () => {
     );
   }
 
-  const toggleMenu = (menu) => {
-    setActiveMenu(activeMenu === menu ? null : menu);
-  };
-
   const viewDetails = (order) => {
     setSelectedOrder(order); // Set the selected order to show details
   };
@@ -71,107 +66,14 @@ const Page = () => {
 
   return (
     <div className="min-h-screen bg-red-50 flex flex-col md:flex-row">
-      {/* Toggle Button */}
-      <button
-        className="md:hidden bg-red-600 text-white p-2 m-2 rounded-md shadow"
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      >
-        {isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
-      </button>
-
       {/* Sidebar */}
-      {isSidebarOpen && (
-        <aside className="w-full md:w-64 bg-red-600 text-white p-4 flex flex-col">
-          <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-          <nav className="space-y-2">
-            {[
-              {
-                name: "Orders",
-                url: `/dashboard/orders`,
-                items: [
-                  {
-                    name: "All Orders",
-                    url: `/dashboard/orders`,
-                  },
-                  {
-                    name: "processing",
-                    url: `/dashboard/orders/processing`,
-                  },
-                  {
-                    name: "Delivered",
-                    url: `/dashboard/orders/delivered`,
-                  },
-                ],
-              },
-              {
-                name: "Users",
-                url: "/dashboard/allusers",
-                items: [
-                  {
-                    name: "All users",
-                    url: `/dashboard/allusers`,
-                  },
-                  {
-                    name: "Admins",
-                    url: `/dashboard/admins`,
-                  },
-                  {
-                    name: "Customers",
-                    url: `/dashboard/customers`,
-                  },
-                ],
-              },
-              {
-                name: "Settings",
-                url: "/dashboard/settins",
-
-                items: [
-                  {
-                    name: "General",
-                    url: `/dashboard/settins`,
-                  },
-                  {
-                    name: "Notifications",
-                    url: `/dashboard/settins`,
-                  },
-                  {
-                    name: "Profile",
-                    url: `/dashboard/settins`,
-                  },
-                ],
-              },
-            ].map((menu, idx) => (
-              <div key={idx}>
-                <button
-                  className="w-full text-left p-2 rounded-md hover:bg-red-700"
-                  onClick={() => toggleMenu(menu.name)}
-                >
-                  {menu.name}
-                </button>
-
-                {activeMenu === menu.name && (
-                  <div className="pl-4 space-y-1">
-                    {menu.items.map((item, subIdx) => (
-                      <Link href={`${item.url}`} key={idx}>
-                        <button
-                          key={subIdx}
-                          className="w-full text-left text-sm p-1 rounded-md hover:bg-red-800"
-                        >
-                          {item.name}
-                        </button>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        </aside>
-      )}
+      <Sidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-6">
-        <h1 className="text-3xl font-bold text-red-700 mb-4">Manage Orders</h1>
+        <h1 className="text-3xl font-bold text-red-700 mb-4">
+          Manage processing Orders
+        </h1>
         <div className="bg-white rounded-lg shadow p-4">
           <table className="w-full border-collapse">
             <thead>

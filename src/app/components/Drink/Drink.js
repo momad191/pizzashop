@@ -8,7 +8,7 @@ import Image from "next/image";
 import Modal from "react-modal";
 
 //components
-import PizzaDetails from "./PizzaDetails";
+import DrinkDetails from "./DrinkDetails";
 
 //icons
 import { IoCloseOutline } from "react-icons/io5";
@@ -23,7 +23,7 @@ const modalStyles = {
   },
 };
 
-const Pizza = ({ pizza }) => {
+const Drink = ({ drink }) => {
   // modal state
   const [modal, setModal] = useState(false);
   //open modal
@@ -41,7 +41,7 @@ const Pizza = ({ pizza }) => {
     >
       <Image
         onClick={openModal}
-        src={pizza.image}
+        src={drink.image}
         alt="image"
         width={270}
         height={270}
@@ -52,18 +52,21 @@ const Pizza = ({ pizza }) => {
 
       {/* title */}
       <div className="text-xl font-bold mb-3 capitalize cursor-pointer">
-        <div>{pizza.name}</div>
+        <div>{drink.name}</div>
       </div>
 
       {/* description */}
-      <div className="text-sm font-medium min-h-[60px] mb-6">
-        {pizza.description}
-      </div>
+      {drink.description && (
+        <div className="text-sm font-medium min-h-[60px] mb-6">
+          {drink.description}
+        </div>
+      )}
+
       {/* price & button */}
       <div className="mb-6 flex items-center justify-between">
         {/* price hidden (sm)  - visible  (lg)  */}
         <div className="hidden lg:flex text-xl font-semibold items-center justify-center gap-1">
-          {pizza.priceSm} <span className="text-sm text-gray-700"> SAR</span>
+          {drink.priceSm} <span className="text-sm text-gray-700"> SAR</span>
         </div>
         {/* btn  hidden (sm)  - visible  (lg)  */}
         <button
@@ -78,10 +81,10 @@ const Pizza = ({ pizza }) => {
           onClick={openModal}
           className="btn btn-sm gradient text-sm lg:hidden px-3"
         >
-          {/* stats at {pizza.priceSm} */}
-          تبدأ من {pizza.priceSm}
+          stats at {drink.priceSm}
         </button>
       </div>
+
       {/* Modal */}
       {modal && (
         <Modal
@@ -101,11 +104,11 @@ const Pizza = ({ pizza }) => {
           </div>
 
           {/* pizza details  */}
-          <PizzaDetails pizza={pizza} modal={modal} setModal={setModal} />
+          <DrinkDetails drink={drink} modal={modal} setModal={setModal} />
         </Modal>
       )}
     </div>
   );
 };
 
-export default Pizza;
+export default Drink;

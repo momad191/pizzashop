@@ -72,6 +72,24 @@ const CheckoutDetails = ({ setModal }) => {
     return errors;
   };
 
+  // async function onSubmit(event) {
+  //   event.preventDefault();
+  //   const errors = validateForm();
+  //   if (Object.keys(errors).length > 0) {
+  //     setFormErrors(errors);
+  //     return;
+  //   }
+
+  //   try {
+  //     await creatOrder(formData, cart, cartTotal); // Pass cart as second parameter
+  //     setSuccessMsg(true);
+  //   } catch (e) {
+  //     console.error(e);
+
+  //     setError("Failed to place the order. Please try again.");
+  //   }
+  // }
+
   async function onSubmit(event) {
     event.preventDefault();
     const errors = validateForm();
@@ -81,11 +99,46 @@ const CheckoutDetails = ({ setModal }) => {
     }
 
     try {
-      await creatOrder(formData, cart, cartTotal); // Pass cart as second parameter
+      await creatOrder(formData, cart, cartTotal);
+
+      // ✅ Build WhatsApp message
+      let orderMessage = `🛒 *طلب جديد*%0A%0A`;
+      orderMessage += `👤 الاسم: ${formData.first_name} ${formData.last_name}%0A`;
+      orderMessage += `📞 رقم الهاتف: ${formData.phone}%0A`;
+      orderMessage += `📧 الايميل: ${formData.email}%0A%0A`;
+      orderMessage += `📍 العنوان: شارع ${formData.street_name}, رقم ${formData.street_no}, مبنى ${formData.block}, طابق ${formData.floor}, شقة ${formData.apt_no}%0A`;
+      if (formData.mentions) {
+        orderMessage += `📝 ملاحظات: ${formData.mentions}%0A`;
+      }
+      orderMessage += `%0A📦 *تفاصيل الطلب*:%0A`;
+      cart.forEach((item) => {
+        orderMessage += `- ${item.name} x${item.amount} = $${(
+          item.price * item.amount
+        ).toFixed(2)}%0A`;
+      });
+      orderMessage += `%0A💰 الاجمالي: $${parseFloat(cartTotal).toFixed(2)}%0A`;
+
+      // ✅ Add location link if available
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const locationUrl = `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`;
+          orderMessage += `%0A📍 الموقع: ${locationUrl}`;
+
+          // Replace with your WhatsApp number (with country code, no + or spaces)
+          const phoneNumber = "966551203580"; // example: "96512345678"
+          const whatsappUrl = `https://wa.me/${phoneNumber}?text=${orderMessage}`;
+
+          window.open(whatsappUrl, "_blank"); // Open WhatsApp
+        });
+      } else {
+        const phoneNumber = "966551203580";
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${orderMessage}`;
+        window.open(whatsappUrl, "_blank");
+      }
+
       setSuccessMsg(true);
     } catch (e) {
       console.error(e);
-
       setError("Failed to place the order. Please try again.");
     }
   }
@@ -119,7 +172,7 @@ const CheckoutDetails = ({ setModal }) => {
   }, [successMsg, setCart, setModal]);
 
   return (
-    <div>
+    <div className="w-full h-full font-Kufi-arabic p-4">
       {error !== "" && (
         <div className=" flex flex-col-2 gap-3 items-center justify-center bg-red-500 border border-white p-4 rounded-xl">
           <FaCheckCircle className="text-5xl text-white/80 " />
@@ -130,7 +183,8 @@ const CheckoutDetails = ({ setModal }) => {
       {successMsg && (
         <div className="flex flex-col justify-center items-center h-[100vh] lg:h-[600px] px-6">
           <h2 className="text-2xl font-semibold text-center ">
-            Thank you! The order has been placed!
+            {/* Thank you! The order has been placed! */}
+            شكراً لك! تم تقديم الطلب!
           </h2>
           <Image
             src={"/success-1.gif"}
@@ -139,18 +193,27 @@ const CheckoutDetails = ({ setModal }) => {
             alt="Success Animation"
             unoptimized
           />
-          <div>
+          {/* <div>
             The window will be close in <span>{count}</span>seconds
+          </div> */}
+
+          <div>
+            سيتم اغلاق النافذة خلال <span>{count}</span>ثانية
           </div>
         </div>
       )}
 
       <div className="lg:gap-x-8 w-full lg:px-12 lg:py-8">
         {/* title  */}
-        <h2 className="mb-6 text-[20px] uppercase font-extrabold text-center lg:text-left pt-6 lg:pt-0 ">
+        {/* <h2 className="mb-6 text-[20px] uppercase font-extrabold text-center lg:text-left pt-6 lg:pt-0 ">
           Shipping & checkout
+        </h2> */}
+        <h2 className="mb-6 text-[20px] uppercase font-extrabold text-center lg:text-right pt-6 lg:pt-0 ">
+          الدفع والتوصيل
         </h2>
+
         <form
+          dir="rtl"
           onSubmit={onSubmit}
           className="h-[86vh] lg:h-[47.5vh] flex flex-col lg:flex-row lg:gap-x-4"
         >
@@ -163,7 +226,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="first name"
+                  placeholder="الاسم الاول"
                   name="first_name"
                   id="first_name"
                   value={formData.first_name}
@@ -176,7 +239,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="last name"
+                  placeholder="الاسم الاخير"
                   name="last_name"
                   id="last_name"
                   value={formData.last_name}
@@ -192,7 +255,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="phone"
+                  placeholder="رقم الجوال "
                   name="phone"
                   id="phone"
                   value={formData.phone}
@@ -204,7 +267,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="Email Address"
+                  placeholder="ايميلك"
                   name="email"
                   id="email"
                   value={formData.email}
@@ -220,7 +283,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="Street name"
+                  placeholder="اسم الشارع"
                   name="street_name"
                   id="street_name"
                   value={formData.street_name}
@@ -232,7 +295,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="Street No"
+                  placeholder="رقم الشارع"
                   name="street_no"
                   id="street_no"
                   value={formData.street_no}
@@ -247,7 +310,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="Block"
+                  placeholder="المبنى"
                   name="block"
                   id="block"
                   value={formData.block}
@@ -259,7 +322,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="Floor"
+                  placeholder="الطابق"
                   name="floor"
                   id="floor"
                   value={formData.floor}
@@ -271,7 +334,7 @@ const CheckoutDetails = ({ setModal }) => {
                 <input
                   type="text"
                   className="w-full input"
-                  placeholder="Apt. No"
+                  placeholder="رقم الشقة"
                   name="apt_no"
                   id="apt_no"
                   value={formData.apt_no}
@@ -285,7 +348,7 @@ const CheckoutDetails = ({ setModal }) => {
               <div className="flex-1 h-full">
                 <textarea
                   className="textarea w-full h-full"
-                  placeholder="Mentions (optional)"
+                  placeholder="ملاحظة (اختياري)"
                   name="mentions"
                   id="mentions"
                   value={formData.mentions}
@@ -298,9 +361,14 @@ const CheckoutDetails = ({ setModal }) => {
           {/* box2 */}
           <div className=" flex-1 h-full lg:max-w-[40%] flex flex-col justify-between pt-3 px-8 lg:p-0 ">
             <div className="border rounded-lg flex flex-col mb-4 p-4 h-full">
-              <h3 className="text-base font-extrabold uppercase mb-4 border-b pd-4 ">
+              {/* <h3 className="text-base font-extrabold uppercase mb-4 border-b pd-4 ">
                 Your order
+              </h3> */}
+
+              <h3 className="text-base font-extrabold uppercase mb-4 border-b pd-4 ">
+                طلبك
               </h3>
+
               {/* items  */}
               <div className="overflow-y-scroll overflow-hidden scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-white-200 font-semibold flex flex-col gap-y-4 h-[240px] py-200">
                 {cart.map((pizza, index) => {
@@ -321,13 +389,19 @@ const CheckoutDetails = ({ setModal }) => {
                 })}
               </div>
               <hr className="border border-primary border-dashed mb-2" />
-              <span className=" font-extrabold text-black/90">
+              {/* <span className=" font-extrabold text-black/90">
                 total: ${parseFloat(cartTotal).toFixed(2)}
+              </span> */}
+              <span className=" font-extrabold text-black/90">
+                المبلغ: ${parseFloat(cartTotal).toFixed(2)}
               </span>
             </div>
             {/* place order button  */}
-            <button type="submit" className="btn btn-lg gradient w-full">
+            {/* <button type="submit" className="btn btn-lg gradient w-full">
               place order
+            </button> */}
+            <button type="submit" className="btn btn-lg gradient w-full">
+              اكمل الطلب
             </button>
           </div>
         </form>

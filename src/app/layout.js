@@ -17,6 +17,7 @@ import {
   Quicksand,
   Roboto_Condensed,
   // JetBrains_Mono,
+  Noto_Kufi_Arabic,
 } from "next/font/google";
 
 // const JetBrainsMono = JetBrains_Mono({
@@ -42,6 +43,20 @@ const robotoCondensed = Roboto_Condensed({
   weight: ["300", "400", "700"],
 });
 
+const KufiArabic = Noto_Kufi_Arabic({
+  variable: "--font-Kufi-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+});
+
+export const metadata = {
+  icons: {
+    icon: "http://localhost:3000/logo.svg",
+    apple: "http://localhost:3000/logo.svg",
+  },
+  title: "Pizza Land ::: Best pizza in town Pizza perfection in every bite",
+};
+
 export default async function RootLayout({ children }) {
   // await dbConnect();
 
@@ -50,7 +65,7 @@ export default async function RootLayout({ children }) {
       <CartProvider>
         <html lang="en">
           <body
-            className={`${quicksand.variable} ${bangers.variable} ${robotoCondensed.variable} font-quicksand`}
+            className={`${quicksand.variable} ${bangers.variable} ${robotoCondensed.variable}  ${KufiArabic.variable} font-quicksand`}
           >
             {/* <Nav />
             <CartMobileIcon />

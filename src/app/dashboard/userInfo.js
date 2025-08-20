@@ -1,20 +1,15 @@
-"use client";
-import Sidebar from "./Sidebar";
 import Image from "next/image";
 import Logout from "@/app/auth/logout/Logout";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
-import { redirect, useParams } from "next/navigation";
-
-const HomePage = async () => {
+const UserInfo = async () => {
   const session = await auth();
 
   if (!session?.user) redirect("/");
 
   return (
     <>
-      <Sidebar />
-
       <div className="flex flex-col items-center m-4">
         <h1 className="text-3xl my-2">Welcome, {session?.user?.name}</h1>
         <Image
@@ -30,4 +25,4 @@ const HomePage = async () => {
   );
 };
 
-export default HomePage;
+export default UserInfo;
