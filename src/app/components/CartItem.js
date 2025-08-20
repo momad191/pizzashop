@@ -13,7 +13,7 @@ const CartItem = ({ pizza }) => {
   const { removeItem, increaseAmount, decreaseAmount } =
     useContext(CartContext);
   return (
-    <div className="select-none">
+    <div className="select-none font-Kufi-arabic">
       <div className="flex gap-x-4 mb-2">
         {/* image  */}
         <div className="flex justify-center items-center">
@@ -22,7 +22,7 @@ const CartItem = ({ pizza }) => {
         {/* pizza info   */}
         <div className="flex-1 flex flex-col gap-y-1">
           {/* name */}
-          <div className="text-lg capitalize font-bold">{pizza.name}</div>
+          <div className="text-lg capitalize font-bold  ">{pizza.name}</div>
           <div className="flex flex-col gap-y-1">
             {/* crust */}
             <div className="capitalize font-medium text text-[15px] ">
@@ -66,8 +66,8 @@ const CartItem = ({ pizza }) => {
 
           {/* price */}
           <div>
-            <span className="text-[17px] font-medium font-robotoCondensed">
-              ${parseFloat(pizza.price * pizza.amount).toFixed(2)}
+            <span className="text-[17px] font-medium font-Kufi-arabic">
+              SAR{parseFloat(pizza.price * pizza.amount).toFixed(2)}
             </span>
           </div>
         </div>

@@ -13,7 +13,7 @@ const CartMobile = () => {
     <div
       className={`${
         cart.length >= 1 && isOpen ? "bottom-0 " : "-bottom-full"
-      } bg-white fixed w-full h-full left-0 z-20 transition-all duration-300  flex flex-col lg:hidden`}
+      } bg-white fixed w-full h-full left-0 z-20 transition-all duration-300  flex flex-col lg:hidden font-Kufi-arabic`}
     >
       {/* top */}
       <CartTop />

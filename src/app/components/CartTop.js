@@ -8,7 +8,7 @@ const CartTop = () => {
   const { isOpen, setIsOpen, itemAmount } = useContext(CartContext);
 
   return (
-    <div className="w-full h-20 border-b flex items-center justify-between px-10">
+    <div className="w-full h-20 border-b flex items-center justify-between px-10 font-Kufi-arabic">
       {/* shopping bag text */}
       {/* <div className="font-semibold">Shopping Bag ({itemAmount})</div> */}
       <div className="font-semibold">الطلبات ({itemAmount})</div>

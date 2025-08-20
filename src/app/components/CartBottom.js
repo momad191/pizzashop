@@ -43,7 +43,7 @@ const CartBottom = () => {
           {/* totla price  */}
           <div
             dir="rtl"
-            className="flex justify-between items-center mb-6 text-lg font-semibold font-robotoCondensed"
+            className="flex justify-between items-center mb-6 text-lg font-semibold font-Kufi-arabic"
           >
             {/* <div>Totla:</div> */}
             <div>المبلغ الإجمالي:</div>

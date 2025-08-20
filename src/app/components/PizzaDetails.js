@@ -69,7 +69,7 @@ const PizzaDetails = ({ pizza, setModal }) => {
   }, [additionalTopping]);
 
   return (
-    <div className="flex flex-col lg:flex-row lg:gap-x-8 h-full md:p-10">
+    <div className="flex flex-col lg:flex-row lg:gap-x-8 h-full md:p-10 font-Kufi-arabic">
       {/* top */}
       <div className="lg:flex-1 flex justify-center items-center">
         {/* pizza image  */}

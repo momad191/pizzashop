@@ -1,7 +1,7 @@
 import Image from "next/image";
 const SizeSelection = ({ pizza, size, setSize }) => {
   return (
-    <div className="mx-auto max-w-sm lg:max-w-none flex items-center justify-center lg:justify-start">
+    <div className="mx-auto max-w-sm lg:max-w-none flex items-center justify-center lg:justify-start font-Kufi-arabic">
       {/* Sizes  */}
       <div className="flex gap-x-12 items-baseline mb-10 font-medium">
         {/* Small  */}
